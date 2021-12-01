@@ -1,0 +1,29 @@
+<%= simple_form_for(@event, defaults: { required: false }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.hidden_field :host_id, :value => current_user.id %> 
+  <div class="field">
+    <div class="control">
+      <%= f.input :name, label: "Name", input_html: { class: "input" }, wrapper: false, label_html: 
+        { class: "label" }, autofocus: true %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <%= f.input :date, label: "Date", as: :datetime, html5: true, include_blank: true, 
+      label_html: { class: "label" } %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <%= f.input :location, label: "Location", input_html: { class: "input" }, wrapper: false, label_html: 
+        { class: "label" } %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <%= f.input :description, label: "Description", input_html: { class: "textarea" }, wrapper: false, label_html: 
+        { class: "label" } %>
+    </div>
+  </div>
+  <%= f.button :submit, class: "button is-info" %>
+<% end %>
