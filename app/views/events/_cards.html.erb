@@ -12,7 +12,9 @@
             <div class="media-content">
               <div class="content">
                 <p>
-                  <strong><%= event.name %></strong>
+                  <%= link_to event do %>
+                    <strong><%= event.name %></strong>
+                  <% end %>
                   <br>
                   <%= event.date.strftime("%-d/%-m/%y %H:%M") %>
                   <br>
