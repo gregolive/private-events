@@ -14,4 +14,11 @@
  *= require_self
  */
 
- @import "bulma";
+$primary: #E64826;
+$info: #E64826;
+
+@import "bulma";
+
+.logo {
+  margin-left: 2vw;
+}

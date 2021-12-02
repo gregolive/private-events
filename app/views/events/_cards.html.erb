@@ -1,32 +1,44 @@
-<% if @events.any? %>
-  <% @events.each do |event| %>
-    <div class="column is-one-third">
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-2by1">
-            <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <%= link_to event do %>
-                    <strong><%= event.name %></strong>
-                  <% end %>
-                  <br>
-                  <%= event.date.strftime("%-d/%-m/%y %H:%M") %>
-                  <br>
-                  <%= event.description %>
-                  <br>
-                  <small><%= event.host.name %> · <%= event.location %></small>
-                </p>
+<section class="hero">
+  <div class="hero-body">
+    <p class="title is-2">
+      Upcoming Events
+    </p>
+    <p class="subtitle">
+      Find something happening near you!
+    </p>
+  </div>
+</section>
+<div class="columns">
+  <% if @events.any? %>
+    <% @events.each do |event| %>
+      <div class="column is-one-third">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-2by1">
+              <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <%= link_to event do %>
+                      <strong><%= event.name %></strong>
+                    <% end %>
+                    <br>
+                    <%= event.date.strftime("%-d/%-m/%y %H:%M") %>
+                    <br>
+                    <%= event.description %>
+                    <br>
+                    <small><%= event.host.name %> · <%= event.location %></small>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
-<% end %>
+</div>
