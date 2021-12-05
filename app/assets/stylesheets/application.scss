@@ -26,3 +26,8 @@ $info: #E64826;
 .logo {
   margin-left: 2vw;
 }
+
+.tight-bottom.content:not(:last-child) {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}

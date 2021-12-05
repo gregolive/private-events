@@ -23,7 +23,7 @@
                       <%= f.submit 'Join event', class: "button is-info" %>
                     <% end %>
                   <% else %>
-                    <p class="has-text-success">You are signed up for this event!</p>
+                    <p class="has-text-primary-dark">You are signed up for this event! 👍</p>
                   <% end %>
                 </p>
               </div>
@@ -38,6 +38,30 @@
           </article>
         </div>
 			</div>
+      <br>
+      <div class="card">
+        <% if @event.attendees.any? %>
+          <div class="card-content">
+            <div class="content is-medium tight-bottom"><strong>Attendee List</strong></div>
+            <% @event.attendees.each do |attendee| %>
+              <div class="content">
+                <div class="columns is-left">
+                  <div class="column is-two-thirds">
+                    <ul>
+                      <li><%= attendee.name %></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="card-content">
+            <div class="content is-medium"><strong>Attendee List</strong></div>
+            <p>No one has signed up to this event. 😔 Be the first!</p>
+          </div>
+        <% end %>
+      </div>
 		</div>
 	</div>
 </div>
