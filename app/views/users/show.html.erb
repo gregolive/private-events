@@ -1,29 +1,85 @@
-<h2><%= @user.name %></h2>
-<div class="column is-one-third">
-  <% if @user.hosted_events.any? %>
-    <% @user.hosted_events.each do |event| %>
-      <div class="card">
-        <div class="card-image">
-          <figure class="image is-2by1">
-            <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
-          </figure>
-        </div>
-        <div class="card-content">
-          <div class="media">
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong><%= event.name %></strong>
-                  <br>
-                  <%= event.description %>
-                  <br>
-                  <small><%= event.location %> · <%= event.date.strftime("%-d/%-m/%y %H:%M") %></small>
-                </p>
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2">
+    <% if Time.now.hour.between?(4,12) %>
+      Good morning,
+    <% elsif Time.now.hour.between?(12,17) %>
+      Good afternoon,
+    <% elsif Time.now.hour > 17 || Time.now.hour < 4 %>
+      Good evening,
+    <% else %>
+      Hello,
+    <% end %>
+    <%= @user.name %> 👋</h2>
+    <br>
+    <p><%= link_to "Edit your account information.", edit_user_registration_path %></p>
+    <br>
+    <h4 class="title is-4">Events you are hosting</h4>
+    <div class="columns is-left">
+      <div class="column is-one-third">
+        <% if @user.hosted_events.any? %>
+          <% @user.hosted_events.each do |event| %>
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-2by1">
+                  <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        <strong><%= event.name %></strong>
+                        <br>
+                        <%= event.description %>
+                        <br>
+                        <small><%= event.location %> · <%= event.date.strftime("%-d/%-m/%y %H:%M") %></small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          <% end %>
+        <% else %>
+          <p>You are not hosting any upcoming events. <%= link_to "Create one now!", events_path %></p>
+        <% end %>
       </div>
-    <% end %>
-  <% end %>
-</div>
+    </div>
+    <br>
+    <h4 class="title is-4">Events you are attending</h4>
+    <div class="columns is-left">
+      <div class="column is-one-third">
+        <% if @user.attended_events.any? %>
+          <% @user.attended_events.each do |event| %>
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-2by1">
+                  <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        <strong><%= event.name %></strong>
+                        <br>
+                        <%= event.description %>
+                        <br>
+                        <small><%= event.location %> · <%= event.date.strftime("%-d/%-m/%y %H:%M") %></small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p>You are not attending any upcoming events. <%= link_to "Find one now!", events_path %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

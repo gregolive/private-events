@@ -16,7 +16,9 @@
                 <p><%= simple_format(@event.description) %></p>
                 <br>
                 <p class="control">
-                  <% unless current_user.attended_events.include?(@event) %>
+                  <% if @event.host == current_user %>
+                    <p class="has-text-primary-dark">You are hosting this event! 🎉</p>
+                  <% elsif !current_user.attended_events.include?(@event) %>
                     <%= simple_form_for(@signup) do |f| %>
                       <%= f.hidden_field :event_attendee_id, :value => current_user.id %>
                       <%= f.hidden_field :attended_event_id, :value => @event.id %>
@@ -58,7 +60,11 @@
         <% else %>
           <div class="card-content">
             <div class="content is-medium"><strong>Attendee List</strong></div>
-            <p>No one has signed up to this event. 😔 Be the first!</p>
+            <% if current_user == @event.host %>
+              <p>No one has signed up to your event yet. 😔 Time to share with friends!</p>
+            <% else %>
+              <p>No one has signed up to this event yet. 😔 Be the first!</p>
+            <% end %>
           </div>
         <% end %>
       </div>

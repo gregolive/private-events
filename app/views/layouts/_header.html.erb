@@ -16,7 +16,7 @@
         <div class="field is-grouped">
           <% if user_signed_in? %>
             <p class="control">
-              <%= link_to root_path, class: "button is-info is-inverted" do %>
+              <%= link_to new_event_url, class: "button is-info is-inverted" do %>
                 <span class="icon">
                   <i class="far fa-calendar-plus"></i>
                 </span>
@@ -24,7 +24,7 @@
               <% end %>
             </p>
             <p class="control">
-              <%= link_to edit_user_registration_path, class: "button is-primary" do %>
+              <%= link_to current_user, class: "button is-primary" do %>
                 <span class="icon">
                   <i class="fas fa-user"></i>
                 </span>
