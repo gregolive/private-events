@@ -32,3 +32,13 @@ $link: #E64826;
   padding-bottom: 0;
   margin-bottom: 0;
 }
+
+// for links on sign in and sign up to sit slightly below the button
+.button.is-info.is-medium {
+  margin-bottom: 0.5em;
+}
+
+// to add a space beside radio button
+input[type="radio"], input[type="checkbox"] {
+  margin-right: 5px;
+}

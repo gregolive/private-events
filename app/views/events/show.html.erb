@@ -16,7 +16,10 @@
                 <p><%= simple_format(@event.description) %></p>
                 <br>
                 <p class="control">
-                  <% if @event.host == current_user %>
+                  <% if !user_signed_in? %>
+                    <p><%= link_to 'Sign up', new_user_registration_path%> or <%= link_to 'sign in', 
+                      new_user_session_path %> to join this event!</p>
+                  <% elsif @event.host == current_user %>
                     <p class="has-text-primary-dark">You are hosting this event! 🎉</p>
                   <% elsif !current_user.attended_events.include?(@event) %>
                     <%= simple_form_for(@signup) do |f| %>
@@ -32,7 +35,7 @@
               <div class="media-right">
                 <p><label class="label">Hosted by</label><%= @event.host.name %></p>
                 <br>
-                <p><label class="label">Date and time</label><%= @event.date %></p>
+                <p><label class="label">Date and time</label><%= @event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %></p>
                 <br>
                 <p><label class="label">Location</label><%= @event.location %></p>
               </div>

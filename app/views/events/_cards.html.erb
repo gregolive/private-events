@@ -8,7 +8,7 @@
     </p>
   </div>
 </section>
-<div class="columns">
+<div class="columns is-multiline">
   <% if @events.any? %>
     <% @events.each do |event| %>
       <div class="column is-one-third">
@@ -29,9 +29,9 @@
                       <strong class="title is-4"><%= event.name %></strong>
                     <% end %>
                     <br>
-                    <%= event.date.strftime("%-d/%-m/%y %H:%M") %>
-                    <br>
-                    <%= event.description %>
+                    <%= event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %>
+                    <br><br>
+                    <%= truncate event.description, length: 100 %>
                     <br>
                     <small><%= event.host.name %> · <%= event.location %></small>
                   </p>
