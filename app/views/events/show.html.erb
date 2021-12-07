@@ -9,7 +9,21 @@
             </figure>
           </div>
           <div class="card-content">
-            <h1 class="title is-2"><%= @event.name %></h1>
+            <% if current_user == @event.host %>
+              <nav class="level">
+                <h1 class="title is-2 tight-bottom"><%= @event.name %></h1>
+                <div class="level-right is-mobile">
+                  <%= link_to edit_event_path(@event), class: "level-item" do %>
+                    <span class="icon"><i class="fa fa-pencil-alt" aria-hidden="true"></i></span>
+                  <% end %>
+                  <%= link_to @event, method: :delete, data: { confirm: "Are you sure you want to delete your event?" } do %>
+                    <span class="icon"><i class="far fa-trash-alt" aria-hidden="true"></i></span>
+                  <% end %>
+                </div>
+              </nav>
+            <% else %>
+              <h1 class="title is-2"><%= @event.name %></h1>
+            <% end %>
             <div class="media">
               <div class="media-content">
                 <label class="label">About this event</label>

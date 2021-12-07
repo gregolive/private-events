@@ -14,8 +14,11 @@ class EventsController < ApplicationController
     @event = current_user.hosted_events.build
   end
 
+  def edit
+  end
+
   def create
-    @event = current_user.hosted_events.build(events_params)
+    @event = current_user.hosted_events.build(event_params)
 
     respond_to do |format|
       if @event.save
@@ -50,7 +53,7 @@ class EventsController < ApplicationController
 
   private
 
-  def events_params
+  def event_params
     params.require(:event).permit(:name, :date, :location, :description)
   end
 
