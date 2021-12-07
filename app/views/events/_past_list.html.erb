@@ -1,0 +1,19 @@
+<section class="hero">
+  <div class="hero-body">
+    <p class="title is-2">
+      Past Events
+    </p>
+    <p class="subtitle">
+      Did you make it to one of these awesome celebrations?
+    </p>
+  </div>
+</section>
+<div class="columns is-multiline">
+  <% if Event.past.any? %>
+    <% Event.past.each do |event| %>
+      <%= render 'cards', event: event %>
+    <% end %>
+  <% else %>
+    <p class="pad-left">Nothing here. 😔 Checkout some upcoming events!</p>
+  <% end %>
+</div>

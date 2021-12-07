@@ -24,114 +24,35 @@
     <div class="columns is-multiline">
       <% if future_host_events.any? %>
         <% future_host_events.each do |event| %>
-          <div class="column is-one-third">
-            <div class="card">
-              <div class="card-image">
-                <%= link_to event do %>
-                  <figure class="image is-2by1">
-                    <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
-                  </figure>
-                <% end %>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <div class="content">
-                      <p>
-                        <%= link_to event do %>
-                          <strong class="title is-5"><%= event.name %></strong>
-                        <% end %>
-                        <br>
-                        <%= truncate event.description, length: 100 %>
-                        <br>
-                        <small><%= event.location %> · <%= event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %></small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <%= render 'events', event: event %>
         <% end %>
       <% else %>
-        <p>You are not hosting any upcoming events. <%= link_to "Create one now!", events_path %></p>
+        <p class="column is-one-third">You are not hosting any upcoming events. <%= link_to "Create one now!", new_event_path %></p>
       <% end %>
     </div>
     <br>
     <% future_attend_events = @user.attended_events.where('date >= ?', Date.today).order(:date) %>
     <h4 class="title is-4">Events you are attending</h4>
     <div class="columns is-multiline">
-      <div class="column is-one-third">
-        <% if future_attend_events.any? %>
-          <% future_attend_events.each do |event| %>
-            <div class="card">
-              <%= link_to event do %>
-                <figure class="image is-2by1">
-                  <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
-                </figure>
-              <% end %>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <div class="content">
-                      <p>
-                        <%= link_to event do %>
-                          <strong class="title is-5"><%= event.name %></strong>
-                        <% end %>
-                        <br>
-                        <%= truncate event.description, length: 100 %>
-                        <br>
-                        <small><%= event.location %> · <%= event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %></small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p>You are not attending any upcoming events. <%= link_to "Find one now!", events_path %></p>
+      <% if future_attend_events.any? %>
+        <% future_attend_events.each do |event| %>
+          <%= render 'events', event: event %>
         <% end %>
-      </div>
+      <% else %>
+        <p class="column is-one-third">You are not attending any upcoming events. <%= link_to "Find one now!", events_path %></p>
+      <% end %>
     </div>
     <br>
     <% past_events = @user.hosted_events.where('date < ?', Date.today).order(:date) + @user.attended_events.where('date < ?', Date.today).order(:date) %>
     <h4 class="title is-4">Past events</h4>
     <div class="columns is-left">
-      <div class="column is-one-third">
-        <% if past_events.any? %>
-          <% past_events.each do |event| %>
-            <div class="card">
-              <div class="card-image">
-                <%= link_to event do %>
-                  <figure class="image is-2by1">
-                    <img src="https://bulma.io/images/placeholders/640x320.png" alt="Placeholder image">
-                  </figure>
-                <% end %>
-              </div>
-              <div class="card-content">
-                <div class="media">
-                  <div class="media-content">
-                    <div class="content">
-                      <p>
-                        <%= link_to event do %>
-                          <strong class="title is-5"><%= event.name %></strong>
-                        <% end %>
-                        <br>
-                        <%= truncate event.description, length: 100 %>
-                        <br>
-                        <small><%= event.location %> · <%= event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %></small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <p>You haven't hosted or attended any events yet.</p>
+      <% if past_events.any? %>
+        <% past_events.each do |event| %>
+          <%= render 'events', event: event %>
         <% end %>
-      </div>
+      <% else %>
+        <p class="column is-one-third">You haven't hosted or attended any events yet.</p>
+      <% end %>
     </div>
   </div>
 </section>

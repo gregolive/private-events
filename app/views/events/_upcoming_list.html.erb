@@ -1,0 +1,19 @@
+<section class="hero">
+  <div class="hero-body">
+    <p class="title is-2">
+      Upcoming Events
+    </p>
+    <p class="subtitle">
+      Find something fun happening near you!
+    </p>
+  </div>
+</section>
+<div class="columns is-multiline">
+  <% if Event.upcoming.any? %>
+    <% Event.upcoming.each do |event| %>
+      <%= render 'cards', event: event %>
+    <% end %>
+  <% else %>
+    <p class="pad-left">No upcoming events. Why not <%= link_to "create one?", new_event_path %></p>
+  <% end %>
+</div>
