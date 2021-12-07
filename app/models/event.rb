@@ -8,11 +8,6 @@ class Event < ApplicationRecord
   validates :location, presence: true
   validates :date, presence: true, future: true
 
-  def self.upcoming
-    return Event.all.where('date >= ?', Date.today).order(:date)
-  end
-
-  def self.past
-    return Event.all.where('date < ?', Date.today).order(:date)
-  end
+  scope :upcoming, -> { where('date >= ?', Date.today).order(:date) }
+  scope :past, -> { where('date < ?', Date.today).order(:date) }
 end
