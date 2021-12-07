@@ -48,6 +48,20 @@ input[type="radio"], input[type="checkbox"] {
   padding-left: 36px;
 }
 
+// for a users own event show page
 .title.is-2.tight-bottom {
   margin-bottom: 0;
+}
+
+// reduce bulma footer size
+.footer {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.flex-wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
