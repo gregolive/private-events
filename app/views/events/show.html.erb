@@ -62,7 +62,7 @@
                 <br>
                 <p>
                   <label class="label">Date and time</label>
-                  <% if current_user.attended_events.include?(@event) || @event.private == false %>
+                  <% if !user_signed_in? || (current_user.attended_events.include?(@event) || @event.host==current_user || @event.private==false) %>
                     <%= @event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %>
                   <% else %>
                     <p class="has-text-primary">- Private -</p>
@@ -71,7 +71,7 @@
                 <br>
                 <p>
                   <label class="label">Location</label>
-                  <% if current_user.attended_events.include?(@event) || @event.private == false %>
+                  <% if !user_signed_in? || (current_user.attended_events.include?(@event) || @event.host==current_user || @event.private==false) %>
                     <%= @event.location %>
                   <% else %>
                     <p class="has-text-primary">- Private -</p>

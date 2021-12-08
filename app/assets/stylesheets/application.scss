@@ -24,6 +24,7 @@ $link: #E64826;
   margin-bottom: 0;
 }
 
+// push logo from left side of screen
 .logo {
   margin-left: 2vw;
 }
@@ -59,9 +60,23 @@ input[type="radio"], input[type="checkbox"] {
   padding-bottom: 24px;
 }
 
+// to keep footer on bottom
 .flex-wrapper {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
   justify-content: space-between;
+}
+
+// adjust checkbox for forms
+.checkbox {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+// remove padding on card icons
+.icon.no-pad {
+  width: auto;
+  padding: 0 0.2em;
 }

@@ -20,7 +20,15 @@
               <br><br>
               <%= truncate event.description, length: 100 %>
               <br>
-              <small><%= event.host.name %> · <%= event.location %></small>
+              <small>
+                <span class="icon no-pad"><i class="fas fa-user" aria-hidden="true"></i>&nbsp;</span><%= event.host.name %> · 
+                <span class="icon no-pad"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
+                <% if !user_signed_in? || (current_user.attended_events.include?(event) || event.host==current_user || event.private==false) %>
+                  <%= event.location %>
+                <% else %>
+                  Private
+                <% end %>
+              </small>
             </p>
           </div>
         </div>
