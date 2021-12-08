@@ -34,15 +34,24 @@
                     <p><%= link_to 'Sign up', new_user_registration_path%> or <%= link_to 'sign in', 
                       new_user_session_path %> to join this event!</p>
                   <% elsif @event.host == current_user %>
-                    <p class="has-text-primary-dark">You are hosting this event! 🎉</p>
+                    <p class="has-text-primary">You are hosting this event! 🎉</p>
                   <% elsif !current_user.attended_events.include?(@event) %>
                     <%= simple_form_for(@signup) do |f| %>
                       <%= f.hidden_field :event_attendee_id, :value => current_user.id %>
                       <%= f.hidden_field :attended_event_id, :value => @event.id %>
-                      <%= f.submit 'Join event', class: "button is-info" %>
+                      <%= button_tag type: 'submit', class: "button is-info" do %>
+                        <span class="icon"><i class="fas fa-calendar-plus"></i></span>
+                        <p>Join event</p>
+                      <% end %>
                     <% end %>
                   <% else %>
-                    <p class="has-text-primary-dark">You are signed up for this event! 👍</p>
+                    <p class="has-text-primary">You are attending this event! 🎉</p>
+                    <br>
+                    <% current_signup = Signup.where(event_attendee_id: current_user, attended_event_id: @event) %>
+                    <%= link_to current_signup.first, method: :delete, class: "button is-info", data: { confirm: 'Are you sure?' } do %>
+                      <span class="icon"><i class="fas fa-calendar-minus"></i></span>
+                      <span>Cancel reservation</span>
+                    <% end %>
                   <% end %>
                 </p>
               </div>
@@ -62,17 +71,17 @@
         <% if @event.attendees.any? %>
           <div class="card-content">
             <div class="content is-medium tight-bottom"><strong>Attendee List</strong></div>
-            <% @event.attendees.each do |attendee| %>
-              <div class="content">
-                <div class="columns is-left">
-                  <div class="column is-two-thirds">
-                    <ul>
+            <div class="content">
+              <div class="columns is-multiline">
+                <div class="column is-two-thirds">
+                  <ul>
+                    <% @event.attendees.each do |attendee| %>
                       <li><%= attendee.name %></li>
-                    </ul>
-                  </div>
+                    <% end %>
+                  </ul>
                 </div>
               </div>
-            <% end %>
+            </div>
           </div>
         <% else %>
           <div class="card-content">
@@ -88,6 +97,3 @@
 		</div>
 	</div>
 </section>
-
-
-    

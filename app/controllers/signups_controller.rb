@@ -16,4 +16,12 @@ class SignupsController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @signup = Signup.find(params[:id])
+    @event = @signup.attended_event
+    @signup.destroy
+
+    redirect_to @event
+  end
 end
