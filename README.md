@@ -1,24 +1,26 @@
-# README
+# Eventive
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails app that allows users to create and join private and public events.
 
-Things you may want to cover:
+## Live demo
 
-* Ruby version
+Avaliable via [Heroku](https://fathomless-fortress-42804.herokuapp.com/) 👈
 
-* System dependencies
+## Features
 
-* Configuration
+- Styling via Bulma gem
+- RESTful design
+- CRUD (or partial CRUD) operations for users, events, and signups
+- User authentication via Devise gem
+- Signed in users can create, edit, and delete their own events, and can join and leave events made by other users
+- Events can be set to private to limit new attendees from joining the event
+- Past events displayed seperately from upcoming events, while a new event must have its date/time set in the future
 
-* Database creation
+## To add
 
-* Database initialization
+- Upload banner image for event
+- Ability to create list of valid users for private events
 
-* How to run the test suite
+## Ruby version
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2.7.4
