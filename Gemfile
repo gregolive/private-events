@@ -10,9 +10,9 @@ group :development, :test do
  gem 'sqlite3'
 end
 # Use PostgreSQL as the production database 
-#group :production do
-#  gem 'pg'
-#end
+group :production do
+  gem 'pg'
+end
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
