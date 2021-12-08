@@ -25,5 +25,11 @@
         { class: "label" } %>
     </div>
   </div>
+  <div class="field">
+    <div class="checkbox">
+      <%= f.input :private, label: "Private event?", input_html: { class: "checkbox" }, wrapper: false, label_html: 
+        { class: "label" } %>
+    </div>
+  </div>
   <%= f.button :submit, class: "button is-info" %>
 <% end %>

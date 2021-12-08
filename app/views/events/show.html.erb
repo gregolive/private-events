@@ -35,7 +35,17 @@
                       new_user_session_path %> to join this event!</p>
                   <% elsif @event.host == current_user %>
                     <p class="has-text-primary">You are hosting this event! 🎉</p>
-                  <% elsif !current_user.attended_events.include?(@event) %>
+                  <% elsif current_user.attended_events.include?(@event) %>
+                    <p class="has-text-primary">You are attending this event! 🎉</p>
+                    <br>
+                    <% current_signup = Signup.where(event_attendee_id: current_user, attended_event_id: @event) %>
+                    <%= link_to current_signup.first, method: :delete, class: "button is-info", data: { confirm: 'Are you sure?' } do %>
+                      <span class="icon"><i class="fas fa-calendar-minus"></i></span>
+                      <span>Cancel reservation</span>
+                    <% end %>
+                  <% elsif @event.private == true %>
+                    <p class="has-text-primary">This is a private event. 🤫</p>
+                  <% else %>
                     <%= simple_form_for(@signup) do |f| %>
                       <%= f.hidden_field :event_attendee_id, :value => current_user.id %>
                       <%= f.hidden_field :attended_event_id, :value => @event.id %>
@@ -44,23 +54,29 @@
                         <p>Join event</p>
                       <% end %>
                     <% end %>
-                  <% else %>
-                    <p class="has-text-primary">You are attending this event! 🎉</p>
-                    <br>
-                    <% current_signup = Signup.where(event_attendee_id: current_user, attended_event_id: @event) %>
-                    <%= link_to current_signup.first, method: :delete, class: "button is-info", data: { confirm: 'Are you sure?' } do %>
-                      <span class="icon"><i class="fas fa-calendar-minus"></i></span>
-                      <span>Cancel reservation</span>
-                    <% end %>
                   <% end %>
                 </p>
               </div>
               <div class="media-right">
                 <p><label class="label">Hosted by</label><%= @event.host.name %></p>
                 <br>
-                <p><label class="label">Date and time</label><%= @event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %></p>
+                <p>
+                  <label class="label">Date and time</label>
+                  <% if current_user.attended_events.include?(@event) || @event.private == false %>
+                    <%= @event.date.try(:strftime, ("%-d/%-m/%y %H:%M")) %>
+                  <% else %>
+                    <p class="has-text-primary">- Private -</p>
+                  <% end %>
+                </p>
                 <br>
-                <p><label class="label">Location</label><%= @event.location %></p>
+                <p>
+                  <label class="label">Location</label>
+                  <% if current_user.attended_events.include?(@event) || @event.private == false %>
+                    <%= @event.location %>
+                  <% else %>
+                    <p class="has-text-primary">- Private -</p>
+                  <% end %>
+                </p>
               </div>
             </div>
           </article>
