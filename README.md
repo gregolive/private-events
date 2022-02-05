@@ -4,7 +4,7 @@ A Rails app that allows users to create and join private and public events.
 
 ## Live demo
 
-Avaliable via [Heroku](https://fathomless-fortress-42804.herokuapp.com/) 👈
+Avaliable via [Heroku](https://eventive-app.herokuapp.com/) 👈
 
 ## Features
 
